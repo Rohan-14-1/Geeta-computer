@@ -419,3 +419,41 @@ window.addEventListener('resize', () => {
         answer.style.maxHeight = answer.scrollHeight + 'px';
     });
 });
+
+// ===== SOLUTIONS TAB SWITCHER =====
+const solutionsTabs = document.querySelectorAll('.solutions-tab');
+const solutionsPanels = document.querySelectorAll('.solutions-panel');
+
+function switchTab(tabName) {
+    // Update tab active states
+    solutionsTabs.forEach(tab => {
+        tab.classList.toggle('active', tab.dataset.tab === tabName);
+    });
+
+    // Update panel visibility with animation
+    solutionsPanels.forEach(panel => {
+        const isTarget = panel.id === 'panel' + tabName.charAt(0).toUpperCase() + tabName.slice(1);
+        if (isTarget) {
+            panel.classList.add('active');
+            // Re-trigger reveal animations for cards in the new panel
+            const cards = panel.querySelectorAll('.service-card, .product-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 60);
+            });
+        } else {
+            panel.classList.remove('active');
+        }
+    });
+}
+
+solutionsTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+        switchTab(tab.dataset.tab);
+    });
+});
