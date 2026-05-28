@@ -648,13 +648,121 @@ ul {
 }
 
 /* ============================================
-   SERVICES SECTION
+   SOLUTIONS SECTION (Services + Products Merged)
    ============================================ */
-.services {
+.solutions {
     padding: 100px 24px;
     background: var(--surface-50);
 }
 
+/* ---- Tab Switcher ---- */
+.solutions-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin-bottom: 48px;
+    background: var(--white);
+    border: 1px solid var(--surface-200);
+    border-radius: var(--radius-full);
+    padding: 6px;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: var(--shadow-sm);
+}
+
+.solutions-tab {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 28px;
+    border: none;
+    border-radius: var(--radius-full);
+    background: transparent;
+    color: var(--text-secondary);
+    font-family: var(--font-heading);
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-base);
+    position: relative;
+    white-space: nowrap;
+    flex: 1;
+    justify-content: center;
+}
+
+.solutions-tab:hover {
+    color: var(--primary);
+    background: rgba(14, 165, 233, 0.04);
+}
+
+.solutions-tab.active {
+    background: var(--gradient-primary);
+    color: var(--white);
+    box-shadow: 0 4px 15px rgba(14, 165, 233, 0.3);
+}
+
+.solutions-tab.active:hover {
+    background: var(--gradient-primary);
+    color: var(--white);
+}
+
+.solutions-tab svg {
+    flex-shrink: 0;
+    transition: color var(--transition-fast);
+}
+
+.solutions-tab.active svg {
+    color: var(--white);
+}
+
+.tab-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 24px;
+    height: 22px;
+    padding: 0 7px;
+    border-radius: var(--radius-full);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    background: rgba(0, 0, 0, 0.06);
+    color: var(--text-muted);
+    transition: all var(--transition-base);
+}
+
+.solutions-tab.active .tab-count {
+    background: rgba(255, 255, 255, 0.25);
+    color: var(--white);
+}
+
+/* ---- Tab Panels ---- */
+.solutions-panels {
+    position: relative;
+}
+
+.solutions-panel {
+    display: none;
+    animation: panelFadeIn 0.4s ease both;
+}
+
+.solutions-panel.active {
+    display: block;
+}
+
+@keyframes panelFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ---- Service Cards ---- */
 .services-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -1043,12 +1151,8 @@ ul {
 }
 
 /* ============================================
-   PRODUCTS SECTION
+   PRODUCTS (within Solutions section)
    ============================================ */
-.products {
-    padding: 100px 24px;
-    background: var(--white);
-}
 
 .products-grid {
     display: grid;
@@ -1792,6 +1896,10 @@ ul {
         max-width: 100%;
     }
 
+    .solutions-tabs {
+        max-width: 100%;
+    }
+
     .services-grid,
     .products-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -1854,8 +1962,20 @@ ul {
         min-width: 80px;
     }
 
-    .services,
-    .products,
+    .solutions {
+        padding: 64px 16px;
+    }
+
+    .solutions-tabs {
+        flex-direction: column;
+        border-radius: var(--radius-lg);
+        max-width: 320px;
+    }
+
+    .solutions-tab {
+        padding: 12px 20px;
+    }
+
     .contact {
         padding: 64px 16px;
     }
