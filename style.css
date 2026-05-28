@@ -164,6 +164,109 @@ ul {
 }
 
 
+/* ---- Shimmer Effect on Primary Buttons ---- */
+.btn-primary::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -60%;
+    width: 40%;
+    height: 200%;
+    background: linear-gradient(
+        105deg,
+        transparent 30%,
+        rgba(255, 255, 255, 0.25) 50%,
+        transparent 70%
+    );
+    transform: skewX(-20deg);
+    animation: shimmer 4s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes shimmer {
+    0%, 100% { left: -60%; }
+    50% { left: 120%; }
+}
+
+/* ============================================
+   PRELOADER
+   ============================================ */
+.preloader {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    background: var(--surface-900);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.preloader.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.preloader-inner {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.preloader-ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    animation: preloaderSpin 1.5s linear infinite;
+}
+
+.preloader-ring:nth-child(1) {
+    width: 100%;
+    height: 100%;
+    border-top-color: var(--primary);
+    animation-duration: 1.5s;
+}
+
+.preloader-ring:nth-child(2) {
+    width: 75%;
+    height: 75%;
+    border-right-color: var(--accent);
+    animation-duration: 2s;
+    animation-direction: reverse;
+}
+
+.preloader-ring:nth-child(3) {
+    width: 50%;
+    height: 50%;
+    border-bottom-color: var(--primary-light);
+    animation-duration: 1s;
+}
+
+.preloader-text {
+    font-family: var(--font-heading);
+    font-size: 0.6rem;
+    font-weight: 700;
+    color: var(--surface-400);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    position: absolute;
+    bottom: -36px;
+    white-space: nowrap;
+    animation: preloaderPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes preloaderSpin {
+    to { transform: rotate(360deg); }
+}
+
+@keyframes preloaderPulse {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
+}
 
 /* ============================================
    HEADER & NAVIGATION
@@ -358,6 +461,16 @@ ul {
 /* ============================================
    HERO SECTION
    ============================================ */
+/* ---- Hero Particles Canvas ---- */
+.hero-particles {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
 .hero {
     position: relative;
     min-height: 100vh;
@@ -469,6 +582,34 @@ ul {
     margin-bottom: 24px;
     text-transform: uppercase;
     animation: fadeInUp 0.6s ease 0.15s both;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+/* ---- Typewriter Effect ---- */
+.typewriter-wrapper {
+    display: inline-flex;
+    align-items: center;
+}
+
+.typewriter-text {
+    color: var(--white);
+    font-weight: 700;
+}
+
+.typewriter-cursor {
+    color: var(--primary-light);
+    font-weight: 300;
+    animation: cursorBlink 0.7s steps(1) infinite;
+    margin-left: 1px;
+}
+
+@keyframes cursorBlink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
 }
 
 .hero-content.centered h2 {
@@ -871,12 +1012,31 @@ ul {
 
 
 /* ============================================
+   WAVE DIVIDER
+   ============================================ */
+.wave-divider {
+    position: relative;
+    margin-top: -2px;
+    z-index: 3;
+    line-height: 0;
+    color: var(--white);
+}
+
+.wave-divider svg {
+    width: 100%;
+    height: 60px;
+    display: block;
+}
+
+/* ============================================
    ABOUT US SECTION
    ============================================ */
 .about {
     padding: 100px 24px;
     background: var(--white);
 }
+
+/* About image reveal animation */
 
 .about-wrapper {
     display: grid;
@@ -891,6 +1051,12 @@ ul {
     overflow: hidden;
     aspect-ratio: 3 / 4;
     box-shadow: var(--shadow-xl), 0 0 40px rgba(14, 165, 233, 0.12);
+    clip-path: inset(0 100% 0 0);
+    transition: clip-path 0.8s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.about-image-wrapper.visible {
+    clip-path: inset(0 0% 0 0);
 }
 
 .about-image-overlay {
@@ -1870,16 +2036,58 @@ ul {
     }
 }
 
-/* Reveal animation for cards */
+/* Reveal animation for cards — enhanced with directions */
 .reveal {
     opacity: 0;
     transform: translateY(30px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
+    transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1), transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .reveal.visible {
     opacity: 1;
     transform: translateY(0);
+}
+
+/* Directional reveal variants */
+.reveal-left {
+    opacity: 0;
+    transform: translateX(-40px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal-right {
+    opacity: 0;
+    transform: translateX(40px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal-left.visible,
+.reveal-right.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.reveal-scale {
+    opacity: 0;
+    transform: scale(0.9);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal-scale.visible {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* ---- 3D Tilt Effect on Cards ---- */
+.tilt-card {
+    transform-style: preserve-3d;
+    will-change: transform;
+}
+
+.tilt-card .service-icon,
+.tilt-card .product-badge,
+.tilt-card h3 {
+    transform: translateZ(20px);
 }
 
 /* ============================================
