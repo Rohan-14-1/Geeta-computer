@@ -244,7 +244,7 @@ window.addEventListener('scroll', () => {
 // ===== 3D TILT EFFECT ON CARDS =====
 (function initTilt() {
     const cards = document.querySelectorAll('.service-card, .product-card');
-    
+
     cards.forEach(card => {
         card.classList.add('tilt-card');
 
@@ -430,7 +430,7 @@ function handleFormSubmit(event) {
 function createConfetti() {
     for (let i = 0; i < 30; i++) {
         const confetti = document.createElement('div');
-        confetti.style.cssText = `position:fixed;left:${Math.random()*100}%;top:-10px;width:10px;height:10px;background:${['#0ea5e9','#8b5cf6','#22c55e','#f59e0b'][Math.floor(Math.random()*4)]};border-radius:50%;z-index:9999;pointer-events:none;animation:confettiFall ${2+Math.random()}s linear forwards;`;
+        confetti.style.cssText = `position:fixed;left:${Math.random() * 100}%;top:-10px;width:10px;height:10px;background:${['#0ea5e9', '#8b5cf6', '#22c55e', '#f59e0b'][Math.floor(Math.random() * 4)]};border-radius:50%;z-index:9999;pointer-events:none;animation:confettiFall ${2 + Math.random()}s linear forwards;`;
         document.body.appendChild(confetti);
         setTimeout(() => confetti.remove(), 3000);
     }
@@ -532,40 +532,120 @@ window.addEventListener('resize', () => {
     });
 });
 
-// ===== SOLUTIONS TAB SWITCHER =====
+// ===== SOLUTIONS FILTER & TAB SWITCHER =====
 const solutionsTabs = document.querySelectorAll('.solutions-tab');
 const solutionsPanels = document.querySelectorAll('.solutions-panel');
 
-function switchTab(tabName) {
-    solutionsTabs.forEach(tab => {
-        tab.classList.toggle('active', tab.dataset.tab === tabName);
+function initSolutionsFilter() {
+    // 1. WhatsApp link formatter for products
+    const whatsappButtons = document.querySelectorAll('.btn-whatsapp-query');
+    const phoneNumber = "#"; // Custom lead contact number
+    whatsappButtons.forEach(btn => {
+        const productName = btn.dataset.product;
+        const msg = encodeURIComponent(`Hi Geeta Computer, I would like to inquire about the price, specifications, and availability of the "${productName}" shown on your website. Please share more details!`);
+        btn.href = `https://wa.me/${phoneNumber}?text=${msg}`;
+        btn.target = "_blank";
     });
 
-    solutionsPanels.forEach(panel => {
-        const isTarget = panel.id === 'panel' + tabName.charAt(0).toUpperCase() + tabName.slice(1);
-        if (isTarget) {
-            panel.classList.add('active');
-            const cards = panel.querySelectorAll('.service-card, .product-card');
-            cards.forEach((card, index) => {
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(20px)';
-                setTimeout(() => {
-                    card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-                    card.style.opacity = '1';
-                    card.style.transform = 'translateY(0)';
-                }, index * 60);
+    // 2. Tab Switcher
+    function switchTab(tabName) {
+        solutionsTabs.forEach(tab => {
+            tab.classList.toggle('active', tab.dataset.tab === tabName);
+        });
+
+        solutionsPanels.forEach(panel => {
+            const isTarget = panel.id === 'panel' + tabName.charAt(0).toUpperCase() + tabName.slice(1);
+            if (isTarget) {
+                panel.classList.add('active');
+
+                // Reset filter to 'all' in the newly opened panel
+                const activeFilterChip = panel.querySelector('.filter-chip[data-filter="all"]');
+                if (activeFilterChip) {
+                    panel.querySelectorAll('.filter-chip').forEach(chip => chip.classList.remove('active'));
+                    activeFilterChip.classList.add('active');
+                }
+
+                // Stagger animate all cards in the newly opened panel
+                const cards = panel.querySelectorAll('.service-card, .product-card');
+                cards.forEach((card, index) => {
+                    card.style.display = 'flex';
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(20px) scale(0.97)';
+
+                    setTimeout(() => {
+                        card.style.transition = 'opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0) scale(1)';
+                    }, index * 50);
+                });
+            } else {
+                panel.classList.remove('active');
+            }
+        });
+    }
+
+    // Expose switchTab globally so inline onclick events in services can trigger it
+    window.switchTab = switchTab;
+
+    solutionsTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            switchTab(tab.dataset.tab);
+        });
+    });
+
+    // 3. Category Filter Chips inside Panels
+    const filterChips = document.querySelectorAll('.filter-chip');
+    filterChips.forEach(chip => {
+        chip.addEventListener('click', function () {
+            const parentPanel = chip.closest('.solutions-panel');
+            if (!parentPanel) return;
+
+            // Highlight clicked chip, remove active from others in the same panel
+            parentPanel.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+            chip.classList.add('active');
+
+            const filterValue = chip.dataset.filter;
+            const cards = parentPanel.querySelectorAll('.service-card, .product-card');
+
+            let visibleIndex = 0;
+            cards.forEach(card => {
+                const cardCategory = card.dataset.category;
+                const isMatch = filterValue === 'all' || cardCategory === filterValue;
+
+                if (isMatch) {
+                    if (card.style.display === 'none') {
+                        card.style.display = 'flex';
+                        card.style.opacity = '0';
+                        card.style.transform = 'translateY(16px) scale(0.97)';
+                    }
+
+                    // Stagger the fade-in of matching cards
+                    setTimeout(() => {
+                        card.style.transition = 'opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)';
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0) scale(1)';
+                    }, visibleIndex * 40);
+
+                    visibleIndex++;
+                } else {
+                    card.style.transition = 'opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1)';
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(16px) scale(0.97)';
+
+                    setTimeout(() => {
+                        if (card.style.opacity === '0') {
+                            card.style.display = 'none';
+                        }
+                    }, 300);
+                }
             });
-        } else {
-            panel.classList.remove('active');
-        }
+        });
     });
 }
 
-solutionsTabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-        switchTab(tab.dataset.tab);
-    });
-});
+// Run solutions filtering initialization
+initSolutionsFilter();
+
 
 // ===== SCROLL TO TOP =====
 const scrollTopBtn = document.getElementById('scrollTop');
