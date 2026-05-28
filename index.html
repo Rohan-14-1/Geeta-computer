@@ -23,6 +23,16 @@
 </head>
 <body>
 
+    <!-- ===== PRELOADER ===== -->
+    <div class="preloader" id="preloader">
+        <div class="preloader-inner">
+            <div class="preloader-ring"></div>
+            <div class="preloader-ring"></div>
+            <div class="preloader-ring"></div>
+            <span class="preloader-text">GEETA COMPUTER</span>
+        </div>
+    </div>
+
     <!-- ===== HEADER ===== -->
     <header class="header" id="header">
         <nav class="navbar">
@@ -51,6 +61,9 @@
 
     <!-- ===== HERO ===== -->
     <section id="home" class="hero">
+        <!-- Floating particles background -->
+        <canvas class="hero-particles" id="heroParticles" aria-hidden="true"></canvas>
+
         <!-- Subtle tech backing circles in center -->
         <div class="hero-visual centered-visual" aria-hidden="true">
             <div class="circle circle-1"></div>
@@ -67,7 +80,13 @@
                 </div>
 
                 <h2>Geeta Computer</h2>
-                <div class="hero-subtitle">Computer & CCTV — Sales, Repair & Installation</div>
+                <div class="hero-subtitle">
+                    Computer & CCTV —
+                    <span class="typewriter-wrapper">
+                        <span class="typewriter-text" id="typewriterText"></span>
+                        <span class="typewriter-cursor">|</span>
+                    </span>
+                </div>
                 
                 <p class="hero-description centered-desc">
                     Professional computer repair services and premium CCTV security systems. We provide reliable solutions to keep your business and home secure, connected, and protected.
@@ -88,6 +107,13 @@
             </div>
         </div>
     </section>
+
+    <!-- Wave Divider -->
+    <div class="wave-divider">
+        <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
+            <path d="M0,60 C360,120 720,0 1080,60 C1260,90 1380,70 1440,60 L1440,100 L0,100 Z" fill="currentColor"/>
+        </svg>
+    </div>
 
     <!-- ===== ABOUT US ===== -->
     <section id="about" class="about">
@@ -138,7 +164,7 @@
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
                             </div>
                             <div class="mini-stat-info">
-                                <strong>500+</strong>
+                                <strong data-count="500" data-suffix="+">0</strong>
                                 <span>Happy Clients</span>
                             </div>
                         </div>
@@ -147,7 +173,7 @@
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
                             </div>
                             <div class="mini-stat-info">
-                                <strong>1000+</strong>
+                                <strong data-count="1000" data-suffix="+">0</strong>
                                 <span>Projects Done</span>
                             </div>
                         </div>
