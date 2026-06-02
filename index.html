@@ -7,21 +7,79 @@
     <meta name="description" content="Geeta Computer provides professional computer repair, CCTV installation, hardware upgrades, and security solutions. Premium CCTV cameras and DVR/NVR systems available.">
     <meta name="keywords" content="computer repair, CCTV installation, CCTV camera, DVR, NVR, computer service, laptop repair, security camera, Geeta Computer">
     <meta name="author" content="Geeta Computer">
-    <meta name="theme-color" content="#0f172a">
+    <meta name="theme-color" content="#0c1626">
 
     <!-- Open Graph -->
     <meta property="og:title" content="Geeta Computer — Computer & CCTV Services">
     <meta property="og:description" content="Your one-stop solution for computer repair, CCTV installation, and premium security products.">
     <meta property="og:type" content="website">
+    <meta property="og:image" content="images/logo.png">
+    <meta property="og:locale" content="en_IN">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Geeta Computer — Computer & CCTV Services">
+    <meta name="twitter:description" content="Computer repair, CCTV installation, and premium security products in Tumakuru.">
+    <meta name="twitter:image" content="images/logo.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/logo_icon.png">
+    <link rel="apple-touch-icon" href="images/logo_icon.png">
+
+    <!-- Local business structured data (helps you appear in local Google results).
+         👉 Replace the placeholder phone, address, and geo coordinates with your real details. -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Geeta Computer & Electronics",
+      "description": "Computer sales, repair and upgrades, plus CCTV camera sales and installation.",
+      "image": "images/logo.png",
+      "telephone": "+91-9876543210",
+      "email": "info@geetacomputer.com",
+      "url": "https://www.geetacomputer.com",
+      "priceRange": "₹₹",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Shop No. 12, Main Computer Market",
+        "addressLocality": "Tumakuru",
+        "addressRegion": "Karnataka",
+        "postalCode": "572101",
+        "addressCountry": "IN"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "13.3392",
+        "longitude": "77.1140"
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+          "opens": "10:00",
+          "closes": "20:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Sunday",
+          "opens": "11:00",
+          "closes": "18:00"
+        }
+      ]
+    }
+    </script>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="style.css?v=1.0.2">
 </head>
 <body>
+
+    <!-- Accessibility: lets keyboard users jump past the nav -->
+    <a href="#home" class="skip-link">Skip to main content</a>
 
     <!-- ===== PRELOADER ===== -->
     <div class="preloader" id="preloader">
@@ -61,17 +119,6 @@
 
     <!-- ===== HERO ===== -->
     <section id="home" class="hero">
-        <!-- Floating particles background -->
-        <canvas class="hero-particles" id="heroParticles" aria-hidden="true"></canvas>
-
-        <!-- Subtle tech backing circles in center -->
-        <div class="hero-visual centered-visual" aria-hidden="true">
-            <div class="circle circle-1"></div>
-            <div class="circle circle-2"></div>
-            <div class="circle circle-3"></div>
-            <div class="center-glow"></div>
-        </div>
-
         <div class="container">
             <div class="hero-content centered">
                 <!-- Centered Logo Badge inspired by reference -->
@@ -79,7 +126,7 @@
                     <img src="images/logo_icon.png" alt="GEETA Computer Logo">
                 </div>
 
-                <h2>Geeta Computer</h2>
+                <h1>Geeta Computer</h1>
                 <div class="hero-subtitle">
                     Computer & CCTV —
                     <span class="typewriter-wrapper">
@@ -134,7 +181,7 @@
                 <div class="about-content reveal-right">
                     <div class="about-tagline">
                         <span class="tagline-line"></span>
-                        Est. 2026
+                        Est. 2018
                         <span class="tagline-line"></span>
                     </div>
                     <h2 class="about-title-serif">About Us</h2>
@@ -146,7 +193,7 @@
                     </div>
                     
                     <p class="about-quote-text">
-                        Geeta Computer has made a humble beginning in the year 2026. Providing an effective, secure, and confidential computing services to the various information technology sectors. Supporting various networks to all IT sectors.
+                        Geeta Computer started back in 2018 as a small repair counter with one workbench and a simple promise: fix it properly, explain it honestly, and charge fairly. Word spread, and over the years we grew into a full computer and CCTV service centre trusted by homes, shops, and offices across town.
                     </p>
 
                     <div class="about-divider">
@@ -154,7 +201,7 @@
                     </div>
 
                     <p class="about-body-text-modern">
-                        Over the years, we have grown into a trusted local partner for computer repairs, hardware upgrades, custom PC builds, and complete business CCTV security installations. Our mission is to deliver expert, high-integrity solutions that keep your systems running at peak performance.
+                        Whether it's a slow laptop, a custom PC build, a printer that won't behave, or a full CCTV setup for your shop, the same technicians who answer your call are the ones who do the work. No call centres, no jargon — just straight answers and dependable repairs you can come back to.
                     </p>
 
                     <!-- Mini stats row -->
@@ -537,8 +584,8 @@
                             </div>
                             <div class="product-body">
                                 <div class="product-rating">
-                                    <span class="stars">★★★★★</span>
-                                    <span class="count">(48 reviews)</span>
+                                    <span class="stars"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Genuine stock</span>
+                                    <span class="count">1-year warranty</span>
                                 </div>
                                 <h3>HD Dome Camera</h3>
                                 <p class="product-desc">2MP Full HD Dome Camera with intelligent night vision and a weatherproof design.</p>
@@ -566,8 +613,8 @@
                             </div>
                             <div class="product-body">
                                 <div class="product-rating">
-                                    <span class="stars">★★★★★</span>
-                                    <span class="count">(36 reviews)</span>
+                                    <span class="stars"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Genuine stock</span>
+                                    <span class="count">1-year warranty</span>
                                 </div>
                                 <h3>4MP Bullet Camera</h3>
                                 <p class="product-desc">High resolution 4MP Bullet Camera with advanced optical sensors and motion alerts.</p>
@@ -596,7 +643,7 @@
                             <div class="product-body">
                                 <div class="product-rating">
                                     <span class="stars">★★★★☆</span>
-                                    <span class="count">(29 reviews)</span>
+                                    <span class="count">1-year warranty</span>
                                 </div>
                                 <h3>2MP IR Camera</h3>
                                 <p class="product-desc">Advanced EXIR IR Camera with long range 40m night vision and smart analytic triggers.</p>
@@ -624,8 +671,8 @@
                             </div>
                             <div class="product-body">
                                 <div class="product-rating">
-                                    <span class="stars">★★★★★</span>
-                                    <span class="count">(52 reviews)</span>
+                                    <span class="stars"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Genuine stock</span>
+                                    <span class="count">1-year warranty</span>
                                 </div>
                                 <h3>8CH DVR Recorder</h3>
                                 <p class="product-desc">High compression 8-Channel DVR System preinstalled with massive 1TB surveillance-grade storage.</p>
@@ -654,7 +701,7 @@
                             <div class="product-body">
                                 <div class="product-rating">
                                     <span class="stars">★★★★☆</span>
-                                    <span class="count">(21 reviews)</span>
+                                    <span class="count">1-year warranty</span>
                                 </div>
                                 <h3>4CH PoE NVR System</h3>
                                 <p class="product-desc">Advanced 4-Channel Network Video Recorder with integrated plug-and-play PoE ports.</p>
@@ -682,8 +729,8 @@
                             </div>
                             <div class="product-body">
                                 <div class="product-rating">
-                                    <span class="stars">★★★★★</span>
-                                    <span class="count">(17 reviews)</span>
+                                    <span class="stars"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Genuine stock</span>
+                                    <span class="count">1-year warranty</span>
                                 </div>
                                 <h3>Wireless Camera Kit</h3>
                                 <p class="product-desc">100% wire-free security solution with 2 high-capacity battery cameras and base hub.</p>
@@ -711,8 +758,8 @@
                             </div>
                             <div class="product-body">
                                 <div class="product-rating">
-                                    <span class="stars">★★★★★</span>
-                                    <span class="count">(31 reviews)</span>
+                                    <span class="stars"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Genuine stock</span>
+                                    <span class="count">1-year warranty</span>
                                 </div>
                                 <h3>AX1800 Wi-Fi 6 Router</h3>
                                 <p class="product-desc">Gigabit internet speeds and massive device connectivity with next-gen wireless standards.</p>
@@ -740,8 +787,8 @@
                             </div>
                             <div class="product-body">
                                 <div class="product-rating">
-                                    <span class="stars">★★★★★</span>
-                                    <span class="count">(43 reviews)</span>
+                                    <span class="stars"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Genuine stock</span>
+                                    <span class="count">1-year warranty</span>
                                 </div>
                                 <h3>Custom Workstation & Gaming PC</h3>
                                 <p class="product-desc">Individually tailored high-performance desktops designed for ultimate productivity, graphics, or gaming.</p>
@@ -769,8 +816,8 @@
                             </div>
                             <div class="product-body">
                                 <div class="product-rating">
-                                    <span class="stars">★★★★★</span>
-                                    <span class="count">(25 reviews)</span>
+                                    <span class="stars"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Genuine stock</span>
+                                    <span class="count">1-year warranty</span>
                                 </div>
                                 <h3>Premium Mechanical Keyboard</h3>
                                 <p class="product-desc">Tactile custom switches, durable double-shot keycaps, and a strong aircraft-grade aluminum build.</p>
@@ -881,7 +928,7 @@
                             </div>
                             <div class="info-card-content">
                                 <h4>Main Service Hub</h4>
-                                <p>Geeta Computer & Electronics<br>Shop No. 12, Main Computer Market<br>Nehru Place, New Delhi - 110019</p>
+                                <p>Geeta Computer & Electronics<br>Shop No. 12, Main Computer Market<br>Tumakuru, Karnataka – 572101</p>
                             </div>
                         </div>
                         <div class="info-card">
@@ -922,7 +969,7 @@
                     <!-- Modern Interactive Map Embed -->
                     <div class="contact-map-card">
                         <iframe 
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14016.92055627255!2d77.243501!3d28.56224!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce3c4cbb23d6d%3A0x67963b516fcf7429!2sNehru%20Place%2C%20New%20Delhi%2C%20Delhi!5e0!3m2!1sen!2sin!4v1680000000000!5m2!1sen!2sin" 
+                            src="https://www.google.com/maps?q=Tumakuru,Karnataka&output=embed" 
                             width="100%" 
                             height="100%" 
                             style="border:0;" 
@@ -1073,16 +1120,16 @@
                 <div class="footer-col">
                     <h4>Contact</h4>
                     <ul>
-                        <li><a href="#">+91-XXXXXXXXXX</a></li>
+                        <li><a href="tel:+919876543210">+91 98765 43210</a></li>
                         <li><a href="mailto:info@geetacomputer.com">info@geetacomputer.com</a></li>
-                        <li><a href="#">Main Market Street</a></li>
-                        <li><a href="#">Mon-Sat: 10AM-8PM</a></li>
+                        <li><a href="#">Main Computer Market, Tumakuru, Karnataka</a></li>
+                        <li><a href="#">Mon–Sat: 10 AM – 8 PM</a></li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
                 <p>&copy; 2026 Geeta Computer. All rights reserved.</p>
-                <p>Made with care — Providing Quality Since Day One</p>
+                <p>Run by the same hands that fix your machines — since 2018.</p>
             </div>
         </div>
     </footer>
@@ -1101,6 +1148,6 @@
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
     </a>
 
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
 </body>
 </html>
