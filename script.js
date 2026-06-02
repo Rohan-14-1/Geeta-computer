@@ -68,99 +68,10 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// ===== FLOATING PARTICLES (Hero Canvas) =====
-(function initParticles() {
-    const canvas = document.getElementById('heroParticles');
-    if (!canvas) return;
-
-    const ctx = canvas.getContext('2d');
-    let particles = [];
-    let animationId;
-
-    function resize() {
-        canvas.width = canvas.offsetWidth;
-        canvas.height = canvas.offsetHeight;
-    }
-
-    function createParticle() {
-        return {
-            x: Math.random() * canvas.width,
-            y: Math.random() * canvas.height,
-            size: Math.random() * 2.5 + 0.5,
-            speedX: (Math.random() - 0.5) * 0.4,
-            speedY: (Math.random() - 0.5) * 0.4,
-            opacity: Math.random() * 0.5 + 0.1,
-            pulseSpeed: Math.random() * 0.02 + 0.005,
-            pulseDirection: 1,
-        };
-    }
-
-    function init() {
-        resize();
-        particles = [];
-        const count = Math.min(Math.floor((canvas.width * canvas.height) / 12000), 80);
-        for (let i = 0; i < count; i++) {
-            particles.push(createParticle());
-        }
-    }
-
-    function drawParticle(p) {
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(14, 165, 233, ${p.opacity})`;
-        ctx.fill();
-    }
-
-    function drawLines() {
-        for (let i = 0; i < particles.length; i++) {
-            for (let j = i + 1; j < particles.length; j++) {
-                const dx = particles[i].x - particles[j].x;
-                const dy = particles[i].y - particles[j].y;
-                const dist = Math.sqrt(dx * dx + dy * dy);
-                if (dist < 120) {
-                    ctx.beginPath();
-                    ctx.moveTo(particles[i].x, particles[i].y);
-                    ctx.lineTo(particles[j].x, particles[j].y);
-                    ctx.strokeStyle = `rgba(14, 165, 233, ${0.08 * (1 - dist / 120)})`;
-                    ctx.lineWidth = 0.5;
-                    ctx.stroke();
-                }
-            }
-        }
-    }
-
-    function animate() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-        particles.forEach(p => {
-            p.x += p.speedX;
-            p.y += p.speedY;
-
-            // Pulse opacity
-            p.opacity += p.pulseSpeed * p.pulseDirection;
-            if (p.opacity > 0.6) p.pulseDirection = -1;
-            if (p.opacity < 0.1) p.pulseDirection = 1;
-
-            // Wrap around edges
-            if (p.x < 0) p.x = canvas.width;
-            if (p.x > canvas.width) p.x = 0;
-            if (p.y < 0) p.y = canvas.height;
-            if (p.y > canvas.height) p.y = 0;
-
-            drawParticle(p);
-        });
-
-        drawLines();
-        animationId = requestAnimationFrame(animate);
-    }
-
-    window.addEventListener('resize', () => {
-        resize();
-    });
-
-    init();
-    animate();
-})();
+// ===== HERO BACKGROUND =====
+// Simplified: the hero now relies on its background image + a single soft
+// glow (CSS). The particle network and mouse-follow glow were removed to keep
+// the hero calm and load faster.
 
 // ===== TYPEWRITER EFFECT =====
 (function initTypewriter() {
@@ -387,14 +298,14 @@ function addToCart(event, productName, price, imagePath) {
     
     // Create animated cart notification
     const cartNotification = document.createElement('div');
-    cartNotification.style.cssText = `position:fixed;left:${rect.left}px;top:${rect.top}px;width:50px;height:50px;background:linear-gradient(135deg, #0ea5e9 0%, #8b5cf6 100%);border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-size:24px;z-index:10000;animation:cartFly 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;box-shadow:0 4px 15px rgba(14, 165, 233, 0.3);`;
+    cartNotification.style.cssText = `position:fixed;left:${rect.left}px;top:${rect.top}px;width:50px;height:50px;background:linear-gradient(135deg, #0b66c3 0%, #8b5cf6 100%);border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-size:24px;z-index:10000;animation:cartFly 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;box-shadow:0 4px 15px rgba(11, 102, 195, 0.3);`;
     cartNotification.textContent = '🛒';
     document.body.appendChild(cartNotification);
     setTimeout(() => cartNotification.remove(), 800);
 
     // Success message with animation
     const msg = document.createElement('div');
-    msg.style.cssText = `position:fixed;top:100px;right:20px;background:linear-gradient(135deg, #0ea5e9 0%, #8b5cf6 100%);color:#fff;padding:20px 30px;border-radius:10px;font-weight:bold;z-index:10001;box-shadow:0 5px 15px rgba(14, 165, 233, 0.3);animation:slideFromRight 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;`;
+    msg.style.cssText = `position:fixed;top:100px;right:20px;background:linear-gradient(135deg, #0b66c3 0%, #8b5cf6 100%);color:#fff;padding:20px 30px;border-radius:10px;font-weight:bold;z-index:10001;box-shadow:0 5px 15px rgba(11, 102, 195, 0.3);animation:slideFromRight 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;`;
     msg.textContent = `✅ ${productName} added to cart!`;
     document.body.appendChild(msg);
     
@@ -461,7 +372,7 @@ function handleFormSubmit(event) {
 function createConfetti() {
     for (let i = 0; i < 30; i++) {
         const confetti = document.createElement('div');
-        confetti.style.cssText = `position:fixed;left:${Math.random() * 100}%;top:-10px;width:10px;height:10px;background:${['#0ea5e9', '#8b5cf6', '#22c55e', '#f59e0b'][Math.floor(Math.random() * 4)]};border-radius:50%;z-index:9999;pointer-events:none;animation:confettiFall ${2 + Math.random()}s linear forwards;`;
+        confetti.style.cssText = `position:fixed;left:${Math.random() * 100}%;top:-10px;width:10px;height:10px;background:${['#0b66c3', '#8b5cf6', '#22c55e', '#f59e0b'][Math.floor(Math.random() * 4)]};border-radius:50%;z-index:9999;pointer-events:none;animation:confettiFall ${2 + Math.random()}s linear forwards;`;
         document.body.appendChild(confetti);
         setTimeout(() => confetti.remove(), 3000);
     }
@@ -713,41 +624,9 @@ if (scrollTopBtn) {
     });
 }
 
-// ===== SOCIAL LINKS HOVER ANIMATIONS =====
-const socialLinks = document.querySelectorAll('.social-link');
-socialLinks.forEach(link => {
-    link.addEventListener('mouseenter', (e) => {
-        link.style.animation = 'bounce 0.6s ease';
-    });
-
-    link.addEventListener('mouseleave', () => {
-        link.style.animation = 'none';
-    });
-});
-
-// ===== WHATSAPP BUTTON ANIMATION =====
-const whatsappBtn = document.querySelector('.whatsapp-btn');
-if (whatsappBtn) {
-    whatsappBtn.addEventListener('mouseenter', () => {
-        whatsappBtn.style.animation = 'heartbeat 0.8s ease';
-    });
-
-    whatsappBtn.addEventListener('mouseleave', () => {
-        whatsappBtn.style.animation = 'fadeInUp 0.6s ease 1s both';
-    });
-}
-
-// ===== INFO CARD HOVER ANIMATIONS =====
-const infoCards = document.querySelectorAll('.info-card');
-infoCards.forEach(card => {
-    card.addEventListener('mouseenter', () => {
-        card.style.animation = 'float 1s ease-in-out';
-    });
-
-    card.addEventListener('mouseleave', () => {
-        card.style.animation = 'none';
-    });
-});
+// ===== SOCIAL & WHATSAPP HOVER =====
+// Hover motion is handled in CSS now (subtle, consistent) instead of
+// scattered JS animations like bounce/heartbeat that felt restless.
 
 // ===== FILTER CHIP HOVER ANIMATIONS =====
 const filterChips = document.querySelectorAll('.filter-chip');
@@ -785,7 +664,7 @@ document.querySelectorAll('.service-card, .product-card').forEach(card => {
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
 
-        const gradient = `radial-gradient(circle at ${x}px ${y}px, rgba(14, 165, 233, 0.15) 0%, transparent 60%)`;
+        const gradient = `radial-gradient(circle at ${x}px ${y}px, rgba(11, 102, 195, 0.15) 0%, transparent 60%)`;
         card.style.backgroundImage = gradient;
     });
 
@@ -794,17 +673,9 @@ document.querySelectorAll('.service-card, .product-card').forEach(card => {
     });
 });
 
-// ===== NAVBAR LOGO ANIMATION ON SCROLL =====
-const logoWrapper = document.querySelector('.logo-wrapper');
-if (logoWrapper) {
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 100) {
-            logoWrapper.style.animation = 'pulse 2s ease-in-out infinite';
-        } else {
-            logoWrapper.style.animation = 'none';
-        }
-    });
-}
+// ===== NAVBAR LOGO =====
+// (Removed the infinite pulse-on-scroll — constant looping motion in the
+// header is distracting and reads as "auto-generated". The logo stays still.)
 
 // ===== ENHANCED PAGE LOAD ANIMATIONS =====
 window.addEventListener('DOMContentLoaded', () => {
@@ -827,21 +698,9 @@ window.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// ===== MOUSE FOLLOW EFFECT FOR HERO =====
-const heroSection = document.querySelector('.hero');
-if (heroSection) {
-    document.addEventListener('mousemove', (e) => {
-        if (window.innerWidth > 1024) {
-            const x = e.clientX / window.innerWidth;
-            const y = e.clientY / window.innerHeight;
-            
-            const centerGlow = heroSection.querySelector('.center-glow');
-            if (centerGlow) {
-                centerGlow.style.transform = `translate(-50%, -50%) translate(${x * 20}px, ${y * 20}px) scale(1.3)`;
-            }
-        }
-    });
-}
+// ===== HERO MOUSE-FOLLOW GLOW =====
+// Removed — the target element (.center-glow) no longer exists, and a
+// cursor-tracking glow added motion noise without much benefit.
 
 // ===== PERFORMANCE OPTIMIZATION: REDUCE ANIMATIONS ON SLOW DEVICES =====
 const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -867,5 +726,4 @@ images.forEach(img => {
     imageObserver.observe(img);
 });
 
-console.log('Geeta Computer website loaded successfully!');
-console.log('✨ Enhanced with premium animations');
+console.log('Geeta Computer — site ready.');
