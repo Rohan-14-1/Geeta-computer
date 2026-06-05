@@ -55,12 +55,12 @@ window.addEventListener('scroll', () => {
     if (!scrollTicking) {
         window.requestAnimationFrame(() => {
             const header = document.querySelector('.header');
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-                header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.2)';
-            } else {
-                header.classList.remove('scrolled');
-                header.style.boxShadow = '0 2px 5px rgba(0, 0, 0, 0.1)';
+            if (header) {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
             }
             scrollTicking = false;
         });
@@ -484,14 +484,18 @@ const solutionsTabs = document.querySelectorAll('.solutions-tab');
 const solutionsPanels = document.querySelectorAll('.solutions-panel');
 
 function initSolutionsFilter() {
-    // 1. WhatsApp link formatter for products
-    const whatsappButtons = document.querySelectorAll('.btn-whatsapp-query');
-    const phoneNumber = "#"; // Custom lead contact number
-    whatsappButtons.forEach(btn => {
-        const productName = btn.dataset.product;
-        const msg = encodeURIComponent(`Hi Geeta Computer, I would like to inquire about the price, specifications, and availability of the "${productName}" shown on your website. Please share more details!`);
-        btn.href = `https://wa.me/${phoneNumber}?text=${msg}`;
-        btn.target = "_blank";
+    // 1. Product enquiry form pre-fill and focus handler
+    const enquireButtons = document.querySelectorAll('.btn-enquire-now');
+    enquireButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const productName = btn.dataset.product;
+            const messageField = document.getElementById('message');
+            if (messageField && productName) {
+                messageField.value = `Hi Geeta Computer, I would like to enquire about the "${productName}". Please share details regarding specifications, pricing, and availability.`;
+                messageField.dispatchEvent(new Event('input', { bubbles: true }));
+                messageField.focus();
+            }
+        });
     });
 
     // 2. Tab Switcher with smooth animations
