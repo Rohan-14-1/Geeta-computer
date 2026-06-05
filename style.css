@@ -286,15 +286,47 @@ ul {
     left: 0;
     right: 0;
     z-index: 1000;
-    background: rgba(255, 255, 255, 0.88);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(12, 22, 38, 0.08);
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     transition: all var(--transition-base);
 }
 
+
+
+/* Nav links start white, go dark on scroll */
+.header .nav-link {
+    color: rgba(255, 255, 255, 0.85);
+}
+.header .nav-link:hover,
+.header .nav-link.active {
+    color: var(--white);
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.header.scrolled .nav-link {
+    color: var(--text-secondary);
+}
+.header.scrolled .nav-link:hover,
+.header.scrolled .nav-link.active {
+    color: var(--primary);
+    background: rgba(11, 102, 195, 0.08);
+}
+
+/* Hamburger bars start white */
+.header .hamburger span {
+    background-color: var(--white);
+}
+.header.scrolled .hamburger span {
+    background-color: var(--text-primary);
+}
+
 .header.scrolled {
-    background: rgba(255, 255, 255, 0.96);
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(12, 22, 38, 0.08);
     box-shadow: 0 4px 30px rgba(12, 22, 38, 0.08);
 }
 
@@ -544,14 +576,16 @@ ul {
 .hero-logo-badge-center {
     width: 130px;
     height: 130px;
-    background: #ffffff;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 18px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35), 0 0 40px rgba(11, 102, 195, 0.25);
-    border: 4px solid rgba(255, 255, 255, 0.85);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25), 0 0 50px rgba(11, 102, 195, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.25);
     margin-bottom: 24px;
     animation: floatCenteredLogo 6s ease-in-out infinite;
     transition: transform var(--transition-base), box-shadow var(--transition-base);
@@ -559,7 +593,9 @@ ul {
 
 .hero-logo-badge-center:hover {
     transform: scale(1.05);
-    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.45), 0 0 50px rgba(11, 102, 195, 0.35);
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.35), 0 0 60px rgba(11, 102, 195, 0.3);
+    border-color: rgba(255, 255, 255, 0.4);
 }
 
 .hero-logo-badge-center img {
@@ -783,7 +819,10 @@ ul {
     font-family: var(--font-heading);
     font-size: clamp(2rem, 4vw, 2.75rem);
     font-weight: 800;
-    color: var(--text-primary);
+    background: linear-gradient(135deg, var(--text-primary) 30%, var(--primary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     letter-spacing: -0.02em;
     line-height: 1.2;
     margin-bottom: 16px;
@@ -1639,36 +1678,36 @@ ul {
     margin-top: auto;
 }
 
-.btn-whatsapp-query {
+.btn-enquire-now {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
     width: 100%;
     padding: 12px;
-    background: #25d366;
+    background: var(--gradient-primary);
     color: var(--white) !important;
     font-size: 0.88rem;
     font-weight: 700;
     border-radius: var(--radius-md);
     transition: all var(--transition-base);
-    box-shadow: 0 4px 10px rgba(37, 211, 102, 0.15);
+    box-shadow: 0 4px 12px rgba(11, 102, 195, 0.2);
     border: none;
     cursor: pointer;
 }
 
-.btn-whatsapp-query:hover {
-    background: #20ba5a;
+.btn-enquire-now:hover {
+    background: var(--primary-dark);
     transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(37, 211, 102, 0.25);
+    box-shadow: 0 6px 18px rgba(11, 102, 195, 0.35);
 }
 
-.btn-whatsapp-query svg {
+.btn-enquire-now svg {
     transition: transform var(--transition-fast);
 }
 
-.btn-whatsapp-query:hover svg {
-    transform: scale(1.1) rotate(-5deg);
+.btn-enquire-now:hover svg {
+    transform: translate(2px, -2px) scale(1.05);
 }
 
 /* ============================================
@@ -1931,12 +1970,12 @@ ul {
 .contact-map-card iframe {
     width: 100%;
     height: 100%;
-    filter: grayscale(0.2) contrast(1.1);
-    transition: filter var(--transition-base);
+    filter: grayscale(1) contrast(1.1) brightness(0.95);
+    transition: filter 0.5s ease;
 }
 
 .contact-map-card:hover iframe {
-    filter: none;
+    filter: grayscale(0) contrast(1) brightness(1);
 }
 
 /* Social Links Wrapper */
@@ -2167,33 +2206,7 @@ ul {
    WHATSAPP BUTTON
    ============================================ */
 .whatsapp-btn {
-    position: fixed;
-    bottom: 32px;
-    left: 32px;
-    width: 56px;
-    height: 56px;
-    background: #25d366;
-    border: none;
-    border-radius: 50%;
-    color: white;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 900;
-    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
-    transition: all var(--transition-base);
-    animation: fadeInUp 0.6s ease 1s both;
-}
-
-.whatsapp-btn:hover {
-    transform: scale(1.1);
-    box-shadow: 0 6px 25px rgba(37, 211, 102, 0.5);
-}
-
-.whatsapp-btn svg {
-    width: 28px;
-    height: 28px;
+    display: none; /* Hidden — no WhatsApp number configured */
 }
 
 /* ============================================
@@ -2858,7 +2871,7 @@ ul {
 }
 
 .service-cta,
-.btn-whatsapp-query {
+.btn-enquire-now {
     animation: slideInUp 0.5s ease 0.35s both;
     transition: all var(--transition-base);
 }
@@ -3270,12 +3283,7 @@ ul {
         height: 44px;
     }
 
-    .whatsapp-btn {
-        bottom: 20px;
-        left: 20px;
-        width: 50px;
-        height: 50px;
-    }
+    /* WhatsApp button hidden globally — no mobile override needed */
 
 }
 
