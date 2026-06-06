@@ -1059,11 +1059,18 @@ ul {
 
 .service-image-wrapper {
     position: relative;
-    height: 150px;
+    height: 180px;
     background: var(--surface-100);
     overflow: hidden;
-    margin: -36px -28px 24px -28px;
-    border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+    margin-bottom: 24px;
+}
+
+.service-card:nth-child(odd) .service-image-wrapper {
+    border-radius: 80px 15px 80px 15px;
+}
+
+.service-card:nth-child(even) .service-image-wrapper {
+    border-radius: 15px 80px 15px 80px;
 }
 
 .service-image-wrapper img {
@@ -1197,6 +1204,13 @@ ul {
         text-align: left;
         padding: 36px 40px;
         min-height: auto;
+    }
+
+    .services-grid .service-card:last-child:nth-child(3n+1) .service-image-wrapper {
+        width: 240px;
+        height: 160px;
+        margin-bottom: 0;
+        flex-shrink: 0;
     }
 
     .services-grid .service-card:last-child:nth-child(3n+1) .service-icon {
