@@ -1595,13 +1595,21 @@ ul {
 
 .product-image-wrapper {
     position: relative;
-    height: 200px;
+    height: 180px;
     background: var(--surface-100);
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    border-bottom: 1px solid var(--surface-100);
+    margin: 24px 24px 0 24px;
+}
+
+.product-card:nth-child(odd) .product-image-wrapper {
+    border-radius: 80px 15px 80px 15px;
+}
+
+.product-card:nth-child(even) .product-image-wrapper {
+    border-radius: 15px 80px 15px 80px;
 }
 
 .product-image-wrapper img {
