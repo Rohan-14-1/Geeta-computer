@@ -531,7 +531,7 @@ ul {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-image: linear-gradient(rgba(30, 50, 45, 0.80), rgba(25, 40, 38, 0.85)), url('images/hero_bg.jpg');
+    background-image: linear-gradient(rgba(5, 15, 40, 0.65), rgba(10, 20, 50, 0.70)), url('images/hero_bg.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -616,7 +616,8 @@ ul {
 .hero-logo-badge-center img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
+    border-radius: 50%;
 }
 
 @keyframes floatCenteredLogo {
