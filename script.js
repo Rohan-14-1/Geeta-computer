@@ -341,7 +341,8 @@ function handleFormSubmit(event) {
     event.preventDefault();
     const name = document.getElementById('name').value.trim();
     const email = document.getElementById('email').value.trim();
-    const phone = document.getElementById('phone').value.trim();
+    const phoneEl = document.getElementById('phone');
+    const phone = phoneEl ? phoneEl.value.trim() : '';
     const message = document.getElementById('message').value.trim();
 
     if (!validateForm(name, email, phone, message)) return;
@@ -380,7 +381,7 @@ function createConfetti() {
 
 function validateForm(name, email, phone, message) {
     formMessage.className = 'form-message';
-    if (!name || !email || !phone || !message) {
+    if (!name || !email || !message) {
         formMessage.className = 'form-message error';
         formMessage.textContent = '❌ Please fill in all fields!';
         return false;
@@ -391,11 +392,13 @@ function validateForm(name, email, phone, message) {
         formMessage.textContent = '❌ Please enter a valid email address!';
         return false;
     }
-    const phonePattern = /^\d{10,}$/;
-    if (!phonePattern.test(phone.replace(/\D/g, ''))) {
-        formMessage.className = 'form-message error';
-        formMessage.textContent = '❌ Please enter a valid phone number (at least 10 digits)!';
-        return false;
+    if (phone) {
+        const phonePattern = /^\d{10,}$/;
+        if (!phonePattern.test(phone.replace(/\D/g, ''))) {
+            formMessage.className = 'form-message error';
+            formMessage.textContent = '❌ Please enter a valid phone number (at least 10 digits)!';
+            return false;
+        }
     }
     if (message.length < 10) {
         formMessage.className = 'form-message error';
@@ -443,41 +446,6 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-// ===== FAQ ACCORDION - ENHANCED =====
-const faqQuestions = document.querySelectorAll('.faq-question');
-
-faqQuestions.forEach(question => {
-    question.addEventListener('click', () => {
-        const item = question.parentElement;
-        const answer = question.nextElementSibling;
-
-        const allItems = document.querySelectorAll('.faq-item');
-        allItems.forEach(i => {
-            if (i !== item && i.classList.contains('active')) {
-                i.classList.remove('active');
-                const ans = i.querySelector('.faq-answer');
-                ans.style.maxHeight = null;
-                ans.style.animation = 'slideUp 0.3s ease forwards';
-            }
-        });
-
-        item.classList.toggle('active');
-        if (item.classList.contains('active')) {
-            answer.style.maxHeight = answer.scrollHeight + 'px';
-            answer.style.animation = 'slideDown 0.3s ease forwards';
-        } else {
-            answer.style.maxHeight = null;
-            answer.style.animation = 'slideUp 0.3s ease forwards';
-        }
-    });
-});
-
-window.addEventListener('resize', () => {
-    const activeAnswers = document.querySelectorAll('.faq-item.active .faq-answer');
-    activeAnswers.forEach(answer => {
-        answer.style.maxHeight = answer.scrollHeight + 'px';
-    });
-});
 
 // ===== SOLUTIONS FILTER & TAB SWITCHER - ENHANCED =====
 const solutionsTabs = document.querySelectorAll('.solutions-tab');
