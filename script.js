@@ -699,3 +699,99 @@ images.forEach(img => {
 });
 
 console.log('Geeta Computer — site ready.');
+
+/* ============================================================
+   ✦ PREMIUM ENHANCEMENTS — interactions
+   (scroll progress, magnetic buttons, ripple, scroll-spy nav,
+    floating WhatsApp reveal, section-header reveal)
+   ============================================================ */
+(function geetaEnhancements() {
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    /* ---- 1. Scroll progress bar ---- */
+    const progress = document.getElementById('scrollProgress');
+    /* ---- 5. Floating WhatsApp reveal (shares scroll handler) ---- */
+    const waBtn = document.getElementById('floatWhatsapp');
+
+    let ticking = false;
+    function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => {
+            const h = document.documentElement;
+            const scrolled = h.scrollTop;
+            const max = h.scrollHeight - h.clientHeight;
+            if (progress) progress.style.width = max > 0 ? (scrolled / max) * 100 + '%' : '0%';
+            if (waBtn) waBtn.classList.toggle('visible', scrolled > 400);
+            ticking = false;
+        });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    /* ---- 2. Ripple effect on buttons ---- */
+    document.querySelectorAll('.btn').forEach(btn => {
+        btn.addEventListener('click', function (e) {
+            if (reduceMotion) return;
+            const rect = btn.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const ripple = document.createElement('span');
+            ripple.className = 'gx-ripple';
+            ripple.style.width = ripple.style.height = size + 'px';
+            ripple.style.left = (e.clientX - rect.left - size / 2) + 'px';
+            ripple.style.top = (e.clientY - rect.top - size / 2) + 'px';
+            btn.appendChild(ripple);
+            setTimeout(() => ripple.remove(), 650);
+        });
+    });
+
+    /* ---- 3. Magnetic effect on primary hero/CTA buttons ---- */
+    if (!reduceMotion && window.innerWidth > 768) {
+        document.querySelectorAll('.hero-ctas .btn, .about-cta-wrapper .btn').forEach(btn => {
+            btn.addEventListener('mousemove', e => {
+                const r = btn.getBoundingClientRect();
+                const mx = e.clientX - r.left - r.width / 2;
+                const my = e.clientY - r.top - r.height / 2;
+                btn.style.transform = `translate(${mx * 0.18}px, ${my * 0.28}px)`;
+            });
+            btn.addEventListener('mouseleave', () => {
+                btn.style.transform = '';
+            });
+        });
+    }
+
+    /* ---- 4. Scroll-spy: highlight nav link of section in view ---- */
+    const sections = ['home', 'about', 'solutions', 'contact']
+        .map(id => document.getElementById(id))
+        .filter(Boolean);
+    const navLinkMap = {};
+    document.querySelectorAll('.nav-link').forEach(link => {
+        const href = link.getAttribute('href');
+        if (href && href.startsWith('#')) navLinkMap[href.slice(1)] = link;
+    });
+    if (sections.length && 'IntersectionObserver' in window) {
+        const spy = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    Object.values(navLinkMap).forEach(l => l.classList.remove('active'));
+                    const link = navLinkMap[entry.target.id];
+                    if (link) link.classList.add('active');
+                }
+            });
+        }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+        sections.forEach(s => spy.observe(s));
+    }
+
+    /* ---- 6. Reveal section headers (adds .visible for title underline) ---- */
+    if ('IntersectionObserver' in window) {
+        const headerObs = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    headerObs.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.2 });
+        document.querySelectorAll('.section-header').forEach(el => headerObs.observe(el));
+    }
+})();
