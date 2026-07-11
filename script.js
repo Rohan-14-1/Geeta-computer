@@ -329,45 +329,67 @@ function viewCart() {
     alert(cartDetails);
 }
 
-// ===== CONTACT FORM =====
-const contactForm = document.getElementById('contactForm');
-const formMessage = document.getElementById('formMessage');
+// Form Submit Logic
+const form = document.getElementById("contact-form");
+const successMsg = document.getElementById("success-msg");
 
-if (contactForm) {
-    contactForm.addEventListener('submit', handleFormSubmit);
-}
+if (form) {
+    const messageField = document.getElementById('message');
+    const charCount = document.getElementById('charCount');
 
-function handleFormSubmit(event) {
-    event.preventDefault();
-    const name = document.getElementById('name').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const phoneEl = document.getElementById('phone');
-    const phone = phoneEl ? phoneEl.value.trim() : '';
-    const message = document.getElementById('message').value.trim();
+    // Character counter
+    if (messageField && charCount) {
+        messageField.addEventListener('input', () => {
+            charCount.textContent = messageField.value.length;
+        });
+    }
 
-    if (!validateForm(name, email, phone, message)) return;
+    form.addEventListener("submit", function(e) {
+        e.preventDefault();
 
-    const btn = contactForm.querySelector('button');
-    btn.style.animation = 'pulse 0.6s ease';
-    btn.disabled = true;
+        const data = new FormData(form);
+        const btn = form.querySelector('.btn-submit');
+        const originalHTML = btn.innerHTML;
+        
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
 
-    formMessage.className = 'form-message processing';
-    formMessage.textContent = '⏳ Processing your message...';
-    formMessage.style.animation = 'slideFromLeft 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards';
-
-    setTimeout(() => {
-        console.log('Form Data:', { name, email, phone, message, timestamp: new Date().toLocaleString() });
-        formMessage.className = 'form-message success';
-        formMessage.textContent = '✅ Thank you! Your message has been sent successfully. We will contact you soon!';
-        formMessage.style.animation = 'slideFromLeft 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards';
-        contactForm.reset();
-        btn.disabled = false;
-        createConfetti();
-        setTimeout(() => {
-            formMessage.style.animation = 'slideFromLeft 0.5s cubic-bezier(0.4, 0, 0.2, 1) reverse forwards';
-            setTimeout(() => { formMessage.style.animation = 'none'; }, 500);
-        }, 5000);
-    }, 1000);
+        fetch(form.action, {
+            method: "POST",
+            body: data,
+            headers: {
+                'Accept': 'application/json'
+            }
+        })
+        .then(response => {
+            if (response.ok) {
+                successMsg.style.display = "block";
+                form.reset();
+                if (charCount) charCount.textContent = '0';
+                btn.innerHTML = '<i class="fas fa-check"></i> Sent!';
+                btn.style.background = '#10b981';
+                btn.style.color = '#fff';
+                
+                // Trigger the premium confetti effect
+                if (typeof createConfetti === 'function') {
+                    createConfetti();
+                }
+                
+                setTimeout(() => {
+                    successMsg.style.display = "none";
+                    btn.innerHTML = originalHTML;
+                    btn.style.background = '';
+                    btn.style.color = '';
+                }, 3000);
+            } else {
+                alert("Failed to send message.");
+                btn.innerHTML = originalHTML;
+            }
+        })
+        .catch(() => {
+            alert("Error sending message.");
+            btn.innerHTML = originalHTML;
+        });
+    });
 }
 
 function createConfetti() {
@@ -377,35 +399,6 @@ function createConfetti() {
         document.body.appendChild(confetti);
         setTimeout(() => confetti.remove(), 3000);
     }
-}
-
-function validateForm(name, email, phone, message) {
-    formMessage.className = 'form-message';
-    if (!name || !email || !message) {
-        formMessage.className = 'form-message error';
-        formMessage.textContent = '❌ Please fill in all fields!';
-        return false;
-    }
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailPattern.test(email)) {
-        formMessage.className = 'form-message error';
-        formMessage.textContent = '❌ Please enter a valid email address!';
-        return false;
-    }
-    if (phone) {
-        const phonePattern = /^\d{10,}$/;
-        if (!phonePattern.test(phone.replace(/\D/g, ''))) {
-            formMessage.className = 'form-message error';
-            formMessage.textContent = '❌ Please enter a valid phone number (at least 10 digits)!';
-            return false;
-        }
-    }
-    if (message.length < 10) {
-        formMessage.className = 'form-message error';
-        formMessage.textContent = '❌ Message should be at least 10 characters long!';
-        return false;
-    }
-    return true;
 }
 
 // ===== SMOOTH SCROLL =====
