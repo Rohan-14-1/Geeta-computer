@@ -2132,12 +2132,7 @@ ul {
 .contact-map-card iframe {
     width: 100%;
     height: 100%;
-    filter: grayscale(1) contrast(1.1) brightness(0.95);
     transition: filter 0.5s ease;
-}
-
-.contact-map-card:hover iframe {
-    filter: grayscale(0) contrast(1) brightness(1);
 }
 
 /* Social Links Wrapper */
