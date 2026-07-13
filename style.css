@@ -1694,7 +1694,7 @@ ul {
    ============================================ */
 .contact {
     padding: 100px 24px;
-    background: linear-gradient(rgba(30, 50, 45, 0.82), rgba(25, 40, 38, 0.88)), url('images/contact_bg.jpg') no-repeat center center/cover;
+    background: linear-gradient(135deg, rgba(32, 48, 44, 0.85), rgba(72, 58, 52, 0.75)), url('images/contact_bg.jpg') no-repeat center center/cover;
     background-attachment: fixed;
     color: var(--white);
     position: relative;
@@ -4344,19 +4344,9 @@ html {
     border-radius: 50%;
 }
 
-/* --- Contact: deep brand navy + soft blue/amber glow ---
-   Replaces the muddy green overlay so the section matches the
-   hero & footer. The desk photo stays faintly underneath for texture. --- */
-.contact {
-    background:
-        radial-gradient(circle at 12% 16%, rgba(11, 102, 195, 0.42), transparent 46%),
-        radial-gradient(circle at 88% 86%, rgba(245, 135, 31, 0.24), transparent 46%),
-        linear-gradient(rgba(12, 22, 38, 0.92), rgba(21, 35, 58, 0.95)),
-        url('images/contact_bg.jpg') no-repeat center center / cover;
-    background-attachment: fixed, fixed, fixed, fixed;
-}
+/* --- Contact: gradient overlay matching keyboard reference --- */
 
-/* keep the form/info above the glows */
+/* keep the form/info above the background */
 .contact>.container {
     position: relative;
     z-index: 2;
@@ -4365,6 +4355,6 @@ html {
 /* mobile: fixed attachment is janky on phones — pin it normally */
 @media (max-width: 768px) {
     .contact {
-        background-attachment: scroll, scroll, scroll, scroll;
+        background-attachment: scroll;
     }
 }
