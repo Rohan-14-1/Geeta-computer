@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Geeta Computer — Computer & CCTV Services | Home</title>
+    <title>Geeta Computer — Computer & CCTV Services | About Us</title>
     <meta name="description"
         content="Geeta Computer provides professional computer repair, CCTV installation, hardware upgrades, and security solutions. Premium CCTV cameras and DVR/NVR systems available.">
     <meta name="keywords"
@@ -36,42 +36,6 @@
     <link rel="icon" type="image/png" sizes="192x192" href="images/logo_mark.png">
     <link rel="apple-touch-icon" sizes="180x180" href="images/logo_mark.png">
 
-    <!-- Structured Data -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "LocalBusiness",
-      "name": "Geeta Computer & Electronics",
-      "description": "Computer sales, repair and upgrades, plus CCTV camera sales and installation in Janakpur, Nepal.",
-      "image": "images/logo.png",
-      "email": "geetacomputerandelectronics@gmail.com",
-      "telephone": "+977-9801674475",
-      "url": "https://www.geetacomputer.com.np",
-      "priceRange": "₹₹",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Pullchowk",
-        "addressLocality": "Janakpur",
-        "addressRegion": "Province 2",
-        "postalCode": "45600",
-        "addressCountry": "NP"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": "26.732992",
-        "longitude": "85.940386"
-      },
-      "openingHoursSpecification": [
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
-          "opens": "09:00",
-          "closes": "20:00"
-        }
-      ]
-    }
-    </script>
-
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -81,12 +45,12 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/base.css">
-    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/about.css">
 </head>
 
 <body>
 
-    <a href="#home" class="skip-link">Skip to main content</a>
+    <a href="#about" class="skip-link">Skip to main content</a>
 
     <!-- Scroll progress indicator -->
     <div class="scroll-progress" id="scrollProgress"></div>
@@ -94,72 +58,90 @@
     <!-- Subtle film-grain texture for depth -->
     <div class="grain-overlay" aria-hidden="true"></div>
 
-    <!-- ===== PRELOADER ===== -->
-    <div class="preloader" id="preloader">
-        <div class="preloader-inner">
-            <div class="preloader-ring"></div>
-            <div class="preloader-ring"></div>
-            <div class="preloader-ring"></div>
-            <span class="preloader-text">GEETA COMPUTER</span>
-        </div>
-    </div>
-
     <!-- ===== HEADER ===== -->
-    <header class="header" id="header"></header>
+    <header class="header scrolled" id="header"></header>
 
-    <!-- ===== HERO ===== -->
-    <section id="home" class="hero">
+    <!--- ===== ABOUT US ===== --->
+    <section id="about" class="about">
         <div class="container">
-            <div class="hero-content centered">
-                <!-- Centered Logo Badge -->
-                <div class="hero-logo-badge-center">
-                    <img src="images/logo_mark.png" alt="GEETA Computer Logo">
+            <div class="about-wrapper">
+                <!-- Left: Image Card -->
+                <div class="about-image-wrapper reveal-left">
+                    <img src="images/about.png" alt="Geeta Computer technician repairing electronics motherboard">
                 </div>
 
-                <h1>Geeta Computer</h1>
-                <div class="hero-subtitle">
-                    COMPUTER & CCTV — NETWORKING
+                <!-- Right: Content -->
+                <div class="about-content reveal-right">
+                    <div class="about-tagline">
+                        — EST. 2018 —
+                    </div>
+                    <h2 class="about-title">About Us</h2>
+
+                    <p class="about-body-text">
+                        Since 2018, Geeta Computer has been providing reliable and affordable computer repair, laptop
+                        service, CCTV installation, networking, printer service, and custom PC solutions.
+                    </p>
+                    <p class="about-body-text">
+                        We are proud to be a trusted local service center for homes, shops, and businesses.
+                    </p>
+
+                    <div class="about-divider-line"></div>
+
+                    <!-- Features Grid -->
+                    <div class="about-features-grid">
+                        <div class="about-feature-item">
+                            <span class="feature-icon"><i class="fa-solid fa-desktop"></i></span>
+                            <span class="feature-text">Computer Repair</span>
+                        </div>
+                        <div class="about-feature-item">
+                            <span class="feature-icon"><i class="fa-solid fa-laptop"></i></span>
+                            <span class="feature-text">Laptop Repair</span>
+                        </div>
+                        <div class="about-feature-item">
+                            <span class="feature-icon"><i class="fa-solid fa-video"></i></span>
+                            <span class="feature-text">CCTV Installation</span>
+                        </div>
+                        <div class="about-feature-item">
+                            <span class="feature-icon"><i class="fa-solid fa-sitemap"></i></span>
+                            <span class="feature-text">Networking</span>
+                        </div>
+                        <div class="about-feature-item">
+                            <span class="feature-icon"><i class="fa-solid fa-print"></i></span>
+                            <span class="feature-text">Printer Service</span>
+                        </div>
+                        <div class="about-feature-item">
+                            <span class="feature-icon"><i class="fa-solid fa-server"></i></span>
+                            <span class="feature-text">Custom PC Builds</span>
+                        </div>
+                    </div>
                 </div>
+            </div>
 
-                <p class="hero-description centered-desc">
-                    Professional computer repair services and premium CCTV security systems. We provide reliable
-                    solutions to keep your business and home secure, connected, and protected.
-                </p>
-
-                <div class="hero-ctas centered-ctas">
-                    <a href="/services" class="btn btn-primary">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="12" r="10" />
-                            <polygon points="10 8 16 12 10 16 10 8" />
-                        </svg>
-                        Explore Services
-                    </a>
-                    <a href="/contact" class="btn btn-outline">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path
-                                d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
-                        </svg>
-                        Get in Touch
-                    </a>
+            <!-- Stats Grid -->
+            <div class="about-stats-grid reveal-scale">
+                <div class="about-stat-card">
+                    <div class="stat-card-icon"><i class="fa-solid fa-users"></i></div>
+                    <div class="stat-card-number" data-count="500" data-suffix="+">500+</div>
+                    <div class="stat-card-label">Happy Customers</div>
+                </div>
+                <div class="about-stat-card">
+                    <div class="stat-card-icon"><i class="fa-solid fa-wrench"></i></div>
+                    <div class="stat-card-number" data-count="1000" data-suffix="+">1000+</div>
+                    <div class="stat-card-label">Devices Repaired</div>
+                </div>
+                <div class="about-stat-card">
+                    <div class="stat-card-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                    <div class="stat-card-number" data-count="50" data-suffix="+">50+</div>
+                    <div class="stat-card-label">Business Projects</div>
+                </div>
+                <div class="about-stat-card">
+                    <div class="stat-card-icon"><i class="fa-solid fa-calendar-check"></i></div>
+                    <div class="stat-card-number">2018</div>
+                    <div class="stat-card-label">Serving You Since</div>
                 </div>
             </div>
         </div>
-
-        <!-- Scroll-down cue -->
-        <div class="hero-scroll-cue" aria-hidden="true">
-            <div class="mouse"></div>
-            <span>Scroll</span>
-        </div>
     </section>
-
-    <!-- Wave Divider -->
-    <div class="wave-divider">
-        <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
-            <path d="M0,60 C360,120 720,0 1080,60 C1260,90 1380,70 1440,60 L1440,100 L0,100 Z" fill="currentColor" />
-        </svg>
-    </div>
 
     <!-- ===== FOOTER ===== -->
     <footer class="footer">
@@ -258,7 +240,7 @@
     </a>
 
     <script src="js/navbar.js" defer></script>
-    <script src="js/index.js" defer></script>
+    <script src="js/about.js" defer></script>
 </body>
 
 </html>
